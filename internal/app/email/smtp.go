@@ -33,7 +33,29 @@ func (s smtpEmail) SendEmail(otp, emails string) error {
 
 	m.SetHeader("Subject", "OTP to verify your Gmail")
 
-	m.SetBody("text/plain", otp+" is your OTP to register to ShoeZone. Thank you registering to our site. Dont't give this code to anyone")
+	m.SetBody("text/plain", otp+" is your OTP to register to BookYourShow. Thank you registering to our site. Dont't give this code to anyone")
+
+	d := gomail.NewDialer("smtp.gmail.com", 587, s.email, s.password)
+
+	d.TLSConfig = &tls.Config{InsecureSkipVerify: true}
+
+	if err := d.DialAndSend(m); err != nil {
+		return err
+	}
+	fmt.Println("OTP has been sent successfully")
+	return nil
+}
+
+func (s smtpEmail) SendResetPassWordEmail(otp, emails string) error {
+	m := gomail.NewMessage()
+
+	m.SetHeader("From", s.email)
+
+	m.SetHeader("To", emails)
+
+	m.SetHeader("Subject", "OTP to verify your Gmail")
+
+	m.SetBody("text/plain", otp+" is your OTP to reset your password for BookYourShow. Thank you for registering on our site. Please do not share this code with anyone.")
 
 	d := gomail.NewDialer("smtp.gmail.com", 587, s.email, s.password)
 
