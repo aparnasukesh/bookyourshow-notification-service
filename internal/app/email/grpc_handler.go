@@ -26,3 +26,13 @@ func (h *GrpcHandler) SendEmail(ctx context.Context, req *pb.EmailRequest) (*pb.
 		Error:   "",
 	}, nil
 }
+
+func (h *GrpcHandler) SendResetPassWordEmail(ctx context.Context, req *pb.EmailRequest) (*pb.EmailResponse, error) {
+	if err := h.svc.SendResetPassWordEmail(req.Otp, req.Email); err != nil {
+		return nil, err
+	}
+	return &pb.EmailResponse{
+		Message: "reset email send successfull",
+		Error:   "",
+	}, nil
+}

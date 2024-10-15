@@ -15,6 +15,7 @@ type smtpEmail struct {
 
 type SmtpEmail interface {
 	SendEmail(otp, emails string) error
+	SendResetPassWordEmail(otp, emails string) error
 }
 
 func NewSMTPEmail(cfg config.Config) SmtpEmail {

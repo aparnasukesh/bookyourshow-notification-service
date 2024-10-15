@@ -1,5 +1,7 @@
 github.com/aparnasukesh/inter-communication v1.0.1 h1:N03Pqlh3qqq919bSWkPDCDgQOjZcpxUwnk5NnHaQvNA=
 github.com/aparnasukesh/inter-communication v1.0.1/go.mod h1:hGz7ey7vVVbn+qVpBD/V6IXG/DcVuBAfZGHT74NGPKM=
+github.com/aparnasukesh/inter-communication v1.3.9 h1:L7b6cxdyA0UAwrhfV07gvM9hwUdbBJQYVFOx+bLmjRM=
+github.com/aparnasukesh/inter-communication v1.3.9/go.mod h1:hGz7ey7vVVbn+qVpBD/V6IXG/DcVuBAfZGHT74NGPKM=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
