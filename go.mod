@@ -3,9 +3,10 @@ module github.com/aparnasukesh/notification-svc
 go 1.21.1
 
 require (
-	github.com/aparnasukesh/inter-communication v1.0.1
+	github.com/aparnasukesh/inter-communication v1.6.2
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/spf13/viper v1.19.0
+	go.mongodb.org/mongo-driver v1.17.1
 	google.golang.org/grpc v1.64.0
 	gopkg.in/mail.v2 v2.3.1
 )
@@ -31,7 +32,7 @@ require (
 	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
 	golang.org/x/net v0.26.0 // indirect
 	golang.org/x/sys v0.21.0 // indirect
-	golang.org/x/text v0.16.0 // indirect
+	golang.org/x/text v0.17.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240624140628-dc46fd24d27d // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
