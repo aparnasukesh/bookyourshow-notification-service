@@ -8,13 +8,18 @@ import (
 )
 
 type Config struct {
-	GrpcPort string `mapstructure:"GRPCPORT" validate:"required"`
-	EMAIL    string `mapstructure:"EMAIL" validate:"required"`
-	PASSWORD string `mapstructure:"PASSWORD" validate:"required"`
+	GrpcPort      string `mapstructure:"GRPCPORT" validate:"required"`
+	EMAIL         string `mapstructure:"EMAIL" validate:"required"`
+	PASSWORD      string `mapstructure:"PASSWORD" validate:"required"`
+	MONGOHOST     string `mapstructure:"MONGOHOST" validate:"required"`
+	MONGODBNAME   string `mapstructure:"MONGODBNAME" validate:"required"`
+	MONGOUSER     string `mapstructure:"MONGOUSER" validate:"required"`
+	MONGOPORT     string `mapstructure:"MONGOPORT" validate:"required"`
+	MONGOPASSWORD string `mapstructure:"MONGOPASSWORD" validate:"required"`
 }
 
 var envs = []string{
-	"GRPCPORT", "EMAIL", "PASSWORD",
+	"GRPCPORT", "EMAIL", "PASSWORD", "MONGOHOST", "MONGODBNAME", "MONGOUSER", "MONGOPORT", "MONGOPASSWORD",
 }
 
 func LoadConfig() (Config, error) {
