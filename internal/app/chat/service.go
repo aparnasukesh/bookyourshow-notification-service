@@ -1,21 +1,29 @@
 package chat
 
-import "context"
+import (
+	"encoding/json"
+)
 
 type service struct {
 	repo Repository
 }
 
 type Service interface {
-	CreateChat(ctx context.Context, userId int) (*Chat, error)
+	chat(body []byte, done chan struct{}) (string, error)
 }
 
 func NewService(repo Repository) Service {
-	return service{
+	return &service{
 		repo: repo,
 	}
 }
 
-func (s *service) CreateChat(ctx context.Context, userId int) (*Chat, error) {
+func (s *service) chat(body []byte, done chan struct{}) (string, error) {
+	revMsg := &ReceiveMessage{}
+	if err := json.Unmarshal(body, revMsg); err != nil {
+		return "", err
+	}
+	output := ResponseMsg(revMsg.Message)
 
+	return output, nil
 }

@@ -15,7 +15,10 @@ func main() {
 	}
 
 	server, err := di.InitResources(cfg)
-
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
 	if err := server(); err != nil {
 		log.Fatal(err)
 	}

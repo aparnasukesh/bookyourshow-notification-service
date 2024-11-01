@@ -11,14 +11,13 @@ import (
 	"google.golang.org/grpc"
 )
 
-func NewGrpcServer(config config.Config, emailHandler email.GrpcHandler, chatHandler chat.GrpcHandler) (func() error, error) {
+func NewGrpcServer(config config.Config, emailHandler email.GrpcHandler) (func() error, error) {
 	lis, err := net.Listen("tcp", ":"+config.GrpcPort)
 	if err != nil {
 		return nil, err
 	}
 	s := grpc.NewServer()
 	pb.RegisterEmailServiceServer(s, &emailHandler)
-	pb.RegisterChatServiceServer(s, &chatHandler)
 	srv := func() error {
 		log.Printf("gRPC server started on port %s", config.GrpcPort)
 		if err := s.Serve(lis); err != nil {
@@ -28,4 +27,8 @@ func NewGrpcServer(config config.Config, emailHandler email.GrpcHandler, chatHan
 		return nil
 	}
 	return srv, nil
+}
+
+func NewRabbitMQConsumer(chatConsumer *chat.NewRabbitMqConsumer) error {
+	return chatConsumer.ChatConsumer()
 }

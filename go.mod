@@ -3,9 +3,10 @@ module github.com/aparnasukesh/notification-svc
 go 1.21.1
 
 require (
-	github.com/aparnasukesh/inter-communication v1.6.2
+	github.com/aparnasukesh/inter-communication v1.6.3
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/spf13/viper v1.19.0
+	github.com/streadway/amqp v1.1.0
 	go.mongodb.org/mongo-driver v1.17.1
 	google.golang.org/grpc v1.64.0
 	gopkg.in/mail.v2 v2.3.1
