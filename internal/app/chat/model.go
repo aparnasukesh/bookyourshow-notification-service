@@ -22,7 +22,8 @@ type Message struct {
 }
 
 type ReceiveMessage struct {
-	UserID  int       `bson:"user_id" json:"user_id"`
-	Message string    `bson:"message" json:"message"`
-	SentAt  time.Time `bson:"sent_at" json:"sent_at"`
+	UserID          int       `bson:"user_id" json:"user_id"`
+	Message         string    `bson:"message" json:"message"`
+	ResponseMessage string    `bson:"response_message" json:"reponse_message"`
+	SentAt          time.Time `bson:"sent_at" json:"sent_at"`
 }

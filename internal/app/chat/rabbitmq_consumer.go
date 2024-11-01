@@ -31,10 +31,8 @@ func (c *NewRabbitMqConsumer) ChatConsumer() error {
 		return err
 	}
 
-	done := make(chan struct{})
 	for msg := range msgs {
-
-		out, err := c.svc.chat(msg.Body, done)
+		out, err := c.svc.chat(msg.Body)
 		if err != nil {
 			return err
 		}
@@ -42,9 +40,10 @@ func (c *NewRabbitMqConsumer) ChatConsumer() error {
 		if err := SendMessage(queue, msg, out); err != nil {
 			return err
 		}
+
 		msg.Ack(false)
+
 	}
 
-	done <- struct{}{}
 	return nil
 }

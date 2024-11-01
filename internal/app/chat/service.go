@@ -2,6 +2,7 @@ package chat
 
 import (
 	"encoding/json"
+	"log"
 )
 
 type service struct {
@@ -9,7 +10,7 @@ type service struct {
 }
 
 type Service interface {
-	chat(body []byte, done chan struct{}) (string, error)
+	chat(body []byte) (string, error)
 }
 
 func NewService(repo Repository) Service {
@@ -18,12 +19,20 @@ func NewService(repo Repository) Service {
 	}
 }
 
-func (s *service) chat(body []byte, done chan struct{}) (string, error) {
+func (s *service) chat(body []byte) (string, error) {
 	revMsg := &ReceiveMessage{}
 	if err := json.Unmarshal(body, revMsg); err != nil {
 		return "", err
 	}
 	output := ResponseMsg(revMsg.Message)
+
+	if err := s.repo.AppendMessage(revMsg.UserID, Message{
+		Message:         revMsg.Message,
+		ResponseMessage: output,
+		SentAt:          revMsg.SentAt,
+	}); err != nil {
+		log.Println(err)
+	}
 
 	return output, nil
 }
