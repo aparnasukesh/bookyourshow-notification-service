@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/aparnasukesh/notification-svc/config"
-	"github.com/aparnasukesh/notification-svc/internal/boot"
 	"github.com/aparnasukesh/notification-svc/internal/di"
 )
 
@@ -15,16 +14,12 @@ func main() {
 		return
 	}
 
-	handler := di.InitEmailNotification(cfg)
-	server, err := boot.NewGrpcServer(cfg, handler)
+	server, err := di.InitResources(cfg)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
-
 	if err := server(); err != nil {
 		log.Fatal(err)
-		return
 	}
-
 }
