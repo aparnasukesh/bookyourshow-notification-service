@@ -28,7 +28,7 @@ func NewMongo(config config.Config) (*mongo.Database, error) {
 		if clientInstance == nil {
 			// MongoDB connection URI with appropriate authSource
 			uri := fmt.Sprintf("mongodb://%s:%s@%s:%s/?authSource=%s&authMechanism=SCRAM-SHA-256",
-				config.MONGOUSER, config.MONGOPASSWORD, config.MONGOHOST, config.MONGOPORT, config.MONGODBNAME)
+				config.MONGOUSER, config.MONGOPASSWORD, config.MONGOHOST, "27018", config.MONGODBNAME)
 
 			// Create MongoDB client
 			clientOpts := options.Client().ApplyURI(uri)
