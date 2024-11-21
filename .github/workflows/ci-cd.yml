@@ -139,7 +139,7 @@ jobs:
 
       - name: Apply MongoDB Kubernetes manifest
         run: |
-          kubectl apply -f k8s/mongodb-service.yaml  # Apply MongoDB manifest
+          kubectl apply -f k8s/mongodb-service.yaml  
 
       - name: Apply Notification Service Kubernetes manifest
         run: |
