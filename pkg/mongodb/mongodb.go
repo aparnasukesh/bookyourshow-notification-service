@@ -29,7 +29,7 @@ func NewMongo(config config.Config) (*mongo.Database, error) {
 			// MongoDB connection URI with appropriate authSource
 			// uri := fmt.Sprintf("mongodb://%s:%s@%s:%s/?authSource=%s&authMechanism=SCRAM-SHA-256",
 			// 	config.MONGOUSER, config.MONGOPASSWORD, config.MONGOHOST, "27017", config.MONGODBNAME)
-			uri := "mongodb://root:rootpassword@mongodb:27017/notification-db"
+			uri := "mongodb://<credentials>@mongodb:27017/?directConnection=true&authSource=admin&appName=mongosh+2.3.3"
 			// Create MongoDB client
 			clientOpts := options.Client().ApplyURI(uri)
 			client, err := mongo.NewClient(clientOpts)
