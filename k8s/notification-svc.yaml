@@ -47,7 +47,6 @@
 #   selector:
 #     app: notification-svc
 
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -76,6 +75,24 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "500m"
+          env:
+            - name: MONGOHOST
+              value: "mongodb"  # The name of the MongoDB service
+            - name: MONGODBNAME
+              value: "notification-db"  # MongoDB database name
+            - name: MONGOUSER
+              value: "root"  # MongoDB root username
+            - name: MONGOPASSWORD
+              value: "rootpassword"  # MongoDB root password
+            - name: MONGOPORT
+              value: "27017"  # MongoDB port
+            - name: GRPCPORT
+              value: "5051"  # gRPC server port
+            - name: EMAIL
+              value: "brocampaparnasukesh@gmail.com"
+            - name: PASSWORD
+              value: "efdr kflf xnns fbkb"  # Ensure the password is correct for your email setup
+
 ---
 apiVersion: v1
 kind: Service
