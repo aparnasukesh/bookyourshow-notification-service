@@ -30,19 +30,4 @@ spec:
             - name: RABBITMQ_URL
               value: "amqp://user:password@rabbitmq:5672/"  # RabbitMQ connection string
             - name: MONGO_URI
-              value: "mongodb://root:rootpassword@mongodb:27017/notification-db"
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: notification-svc
-  labels:
-    app: notification-svc
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 5051
-      targetPort: 5051
-  selector:
-    app: notification-svc
+              value: "mongodb://root:rootpassword@mongodb:27017/notification-db"  # Correct MongoDB URI
