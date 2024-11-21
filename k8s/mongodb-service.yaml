@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: mongo:latest  # You can specify a version if needed, e.g., mongo:5.0
+          image: mongo:latest
           ports:
-            - containerPort: 27018  # MongoDB default port
+            - containerPort: 27017  # Correct MongoDB default port
           resources:
             requests:
               memory: "128Mi"
@@ -28,11 +28,11 @@ spec:
               cpu: "500m"
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: "root"  # Root username for MongoDB
+              value: "root"
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: "rootpassword"  # Root password for MongoDB
+              value: "rootpassword"
             - name: MONGO_INITDB_DATABASE
-              value: "notification-db"  # Default database for the notification service
+              value: "notification-db"
 
 ---
 apiVersion: v1
@@ -42,9 +42,9 @@ metadata:
   labels:
     app: mongodb
 spec:
-  type: ClusterIP  # ClusterIP is the default type, it allows internal access within the cluster
+  type: ClusterIP
   ports:
-    - port: 27018
-      targetPort: 27018
+    - port: 27017
+      targetPort: 27017
   selector:
     app: mongodb
