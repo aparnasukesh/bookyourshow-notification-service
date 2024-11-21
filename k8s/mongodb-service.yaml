@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:latest  # You can specify a version if needed, e.g., mongo:5.0
+          ports:
+            - containerPort: 27018  # MongoDB default port
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "root"  # Root username for MongoDB
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "rootpassword"  # Root password for MongoDB
+            - name: MONGO_INITDB_DATABASE
+              value: "notification-db"  # Default database for the notification service
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+spec:
+  type: ClusterIP  # ClusterIP is the default type, it allows internal access within the cluster
+  ports:
+    - port: 27018
+      targetPort: 27018
+  selector:
+    app: mongodb
