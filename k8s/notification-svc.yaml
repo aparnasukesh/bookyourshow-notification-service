@@ -26,6 +26,12 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "500m"
+          env:
+            - name: RABBITMQ_URL
+              value: "amqp://user:password@rabbitmq:5672/"  # RabbitMQ connection string
+            - name: MONGO_URI
+              value: "mongodb://root:rootpassword@mongodb:27017/notification-db"  # MongoDB URI
+
 ---
 apiVersion: v1
 kind: Service
@@ -34,7 +40,7 @@ metadata:
   labels:
     app: notification-svc
 spec:
-  type: LoadBalancer
+  type: LoadBalancer  # Change to ClusterIP or NodePort for local development
   ports:
     - port: 5051
       targetPort: 5051
