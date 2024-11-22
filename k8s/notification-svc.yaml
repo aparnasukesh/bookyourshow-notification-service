@@ -88,7 +88,7 @@ metadata:
   labels:
     app: notification-svc
 spec:
-  type: LoadBalancer  # Change to ClusterIP or NodePort for local development
+  type: ClusterIP  # Change to ClusterIP or NodePort for local development
   ports:
     - port: 5051
       targetPort: 5051
