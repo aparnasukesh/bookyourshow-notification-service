@@ -16,21 +16,21 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: mongo:latest
+          image: mongo:6.0
           ports:
             - containerPort: 27017
           resources:
             requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
               memory: "512Mi"
               cpu: "500m"
-            limits:
-              memory: "1Gi"
-              cpu: "1"
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: "root"
+              value: "root"  # Admin user for MongoDB
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: "rootpassword"
+              value: "rootpassword"  # Secure root password
 ---
 apiVersion: v1
 kind: Service
@@ -39,7 +39,6 @@ metadata:
   labels:
     app: mongodb
 spec:
-  type: ClusterIP
   ports:
     - port: 27017
       targetPort: 27017
