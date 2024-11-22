@@ -14,15 +14,6 @@ spec:
       labels:
         app: mongodb
     spec:
-      initContainers:
-        - name: init-sysctl
-          image: busybox
-          command:
-            - sysctl
-            - -w
-            - "vm.max_map_count=262144"  # Set vm.max_map_count to 262144 (recommended by MongoDB)
-          securityContext:
-            privileged: true  # Allow init container to modify sysctl parameters
       containers:
         - name: mongodb
           image: mongo:latest
@@ -30,21 +21,16 @@ spec:
             - containerPort: 27017
           resources:
             requests:
-              memory: "512Mi"  # Increased memory request
+              memory: "512Mi"
               cpu: "500m"
             limits:
-              memory: "1Gi"  # Increased memory limit
+              memory: "1Gi"
               cpu: "1"
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               value: "root"
             - name: MONGO_INITDB_ROOT_PASSWORD
               value: "rootpassword"
-            - name: MONGO_INITDB_DATABASE
-              value: "notification-db"
-            - name: MONGO_OPTIONS
-              value: "--wiredTigerCacheSizeGB=1"  # Adjust WiredTiger cache size (optional based on actual memory)
-          
 ---
 apiVersion: v1
 kind: Service

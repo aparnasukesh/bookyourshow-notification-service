@@ -46,8 +46,6 @@
 #       targetPort: 5051
 #   selector:
 #     app: notification-svc
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -78,22 +76,21 @@ spec:
               cpu: "500m"
           env:
             - name: MONGOHOST
-              value: "mongodb"  # The name of the MongoDB service
-            - name: MONGODBNAME
-              value: "notification-db"  # MongoDB database name
+              value: "mongodb"
             - name: MONGOUSER
-              value: "root"  # MongoDB root username
+              value: "root"
             - name: MONGOPASSWORD
-              value: "rootpassword"  # MongoDB root password
+              value: "rootpassword"
+            - name: MONGODBNAME
+              value: "admin"  # `admin` is the default auth database
             - name: MONGOPORT
-              value: "27017"  # MongoDB port
+              value: "27017"
             - name: GRPCPORT
-              value: "5051"  # gRPC server port
+              value: "5051"
             - name: EMAIL
               value: "brocampaparnasukesh@gmail.com"
             - name: PASSWORD
-              value: "efdr kflf xnns fbkb"  # Ensure the password is correct for your email setup
-
+              value: "efdr kflf xnns fbkb"
 ---
 apiVersion: v1
 kind: Service
