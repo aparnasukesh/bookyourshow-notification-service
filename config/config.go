@@ -8,7 +8,7 @@ import (
 )
 
 type Config struct {
-	GrpcPort      string `mapstructure:"GRPCPORT" validate:"required"`
+	GRPCPORT      string `mapstructure:"GRPCPORT" validate:"required"`
 	EMAIL         string `mapstructure:"EMAIL" validate:"required"`
 	PASSWORD      string `mapstructure:"PASSWORD" validate:"required"`
 	MONGOHOST     string `mapstructure:"MONGOHOST" validate:"required"`
