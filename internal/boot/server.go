@@ -12,8 +12,8 @@ import (
 )
 
 func NewGrpcServer(config config.Config, emailHandler email.GrpcHandler) (func() error, error) {
-	//lis, err := net.Listen("tcp", ":"+config.GrpcPort)
-	lis, err := net.Listen("tcp", "0.0.0.0:"+config.GRPCPORT)
+	lis, err := net.Listen("tcp", ":"+config.GRPCPORT)
+	//lis, err := net.Listen("tcp", "0.0.0.0:"+config.GRPCPORT)
 
 	if err != nil {
 		return nil, err
@@ -32,5 +32,11 @@ func NewGrpcServer(config config.Config, emailHandler email.GrpcHandler) (func()
 }
 
 func NewRabbitMQConsumer(chatConsumer *chat.NewRabbitMqConsumer) error {
-	return chatConsumer.ChatConsumer()
+	go func() {
+		if err := chatConsumer.ChatConsumer(); err != nil {
+			log.Fatal(err)
+		}
+
+	}()
+	return nil
 }
