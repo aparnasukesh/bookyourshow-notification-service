@@ -12,8 +12,8 @@ import (
 )
 
 func NewGrpcServer(config config.Config, emailHandler email.GrpcHandler) (func() error, error) {
-	lis, err := net.Listen("tcp", ":"+config.GRPCPORT)
-	//lis, err := net.Listen("tcp", "0.0.0.0:"+config.GRPCPORT)
+	//lis, err := net.Listen("tcp", ":"+config.GRPCPORT)
+	lis, err := net.Listen("tcp", "0.0.0.0:"+config.GRPCPORT)
 
 	if err != nil {
 		return nil, err
