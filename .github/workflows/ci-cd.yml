@@ -62,3 +62,8 @@ jobs:
           kubectl apply -f k8s/rabbitmq-service.yaml
           kubectl apply -f k8s/mongodb-service.yaml  
           kubectl apply -f k8s/notification-svc.yaml
+
+      # Ensure deployment restarts to pick up new image
+      - name: Restart Notification Service Deployment
+        run: |
+          kubectl rollout restart deployment notification-svc
