@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: rabbitmq
   labels:
-    app: rabbitmq
+    app.kubernetes.io/name: rabbitmq
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rabbitmq
+      app.kubernetes.io/name: rabbitmq
   template:
     metadata:
       labels:
-        app: rabbitmq
+        app.kubernetes.io/name: rabbitmq
     spec:
       containers:
         - name: rabbitmq
