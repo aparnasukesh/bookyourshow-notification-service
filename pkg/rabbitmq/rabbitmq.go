@@ -9,5 +9,5 @@ import (
 // }
 
 func NewRabbitMQConnection() (*amqp.Connection, error) {
-	return amqp.Dial("amqp://user:password@rabbitmq:5672/") // Use updated credentials
+	return amqp.Dial("amqp://admin:admin123@rabbitmq:5672/") // Use updated credentials
 }
