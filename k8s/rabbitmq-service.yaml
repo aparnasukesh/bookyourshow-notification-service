@@ -28,7 +28,6 @@
 #             - name: RABBITMQ_DEFAULT_PASS
 #               value: "admin123"  # Changed password for better security
 
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -37,24 +36,23 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rabbitmq
+      app.kubernetes.io/name: rabbitmq   # keep same as old one
   template:
     metadata:
       labels:
-        app: rabbitmq
+        app.kubernetes.io/name: rabbitmq
     spec:
       containers:
         - name: rabbitmq
           image: rabbitmq:3-management
           ports:
-            - containerPort: 5672  # RabbitMQ AMQP Port
-            - containerPort: 15672 # RabbitMQ Management UI Port
+            - containerPort: 5672
+            - containerPort: 15672
           env:
             - name: RABBITMQ_DEFAULT_USER
               value: "admin"
             - name: RABBITMQ_DEFAULT_PASS
               value: "admin123"
-
 ---
 apiVersion: v1
 kind: Service
@@ -62,13 +60,13 @@ metadata:
   name: rabbitmq
 spec:
   selector:
-    app: rabbitmq
+    app.kubernetes.io/name: rabbitmq   # must match the pod label
   ports:
-    - name: amqp   # required
+    - name: amqp
       protocol: TCP
       port: 5672
       targetPort: 5672
-    - name: management # required
+    - name: management
       protocol: TCP
       port: 15672
       targetPort: 15672
