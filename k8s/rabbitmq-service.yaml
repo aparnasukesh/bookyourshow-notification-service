@@ -1,29 +1,74 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: rabbitmq
+#   labels:
+#     app.kubernetes.io/name: rabbitmq
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app.kubernetes.io/name: rabbitmq
+#   template:
+#     metadata:
+#       labels:
+#         app.kubernetes.io/name: rabbitmq
+#     spec:
+#       containers:
+#         - name: rabbitmq
+#           image: rabbitmq:3-management
+#           ports:
+#             - containerPort: 5672   # AMQP protocol for communication
+#               name: amqp-port       # Port name for AMQP protocol
+#             - containerPort: 15672  # Management UI for RabbitMQ
+#               name: management-port # Port name for Management UI
+#           env:
+#             - name: RABBITMQ_DEFAULT_USER
+#               value: "admin"  # Changed from 'guest' to 'user'
+#             - name: RABBITMQ_DEFAULT_PASS
+#               value: "admin123"  # Changed password for better security
+
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rabbitmq
-  labels:
-    app.kubernetes.io/name: rabbitmq
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: rabbitmq
+      app: rabbitmq
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: rabbitmq
+        app: rabbitmq
     spec:
       containers:
         - name: rabbitmq
           image: rabbitmq:3-management
           ports:
-            - containerPort: 5672   # AMQP protocol for communication
-              name: amqp-port       # Port name for AMQP protocol
-            - containerPort: 15672  # Management UI for RabbitMQ
-              name: management-port # Port name for Management UI
+            - containerPort: 5672  # RabbitMQ AMQP Port
+            - containerPort: 15672 # RabbitMQ Management UI Port
           env:
             - name: RABBITMQ_DEFAULT_USER
-              value: "admin"  # Changed from 'guest' to 'user'
+              value: "admin"
             - name: RABBITMQ_DEFAULT_PASS
-              value: "admin123"  # Changed password for better security
+              value: "admin123"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+    - name: amqp   # required
+      protocol: TCP
+      port: 5672
+      targetPort: 5672
+    - name: management # required
+      protocol: TCP
+      port: 15672
+      targetPort: 15672
